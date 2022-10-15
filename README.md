@@ -21,3 +21,8 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
     - [] e.g. x-organization: Skyline
 
 ## Potential Shortcomings / Icebox
+- [] 
+- [] 
+- [] 
+- [] 
+- [] 
