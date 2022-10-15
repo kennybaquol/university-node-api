@@ -1,0 +1,29 @@
+{
+  "name": "university-node-api",
+  "version": "1.0.0",
+  "description": "A university is looking to build software that enables them to maintain details about their students, faculty, courses, course schedules, and student grades and major/minor progress. Phase 1 of the project is to build a RESTful API to maintain all personal student data.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kennybaquol/university-node-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kennybaquol/university-node-api/issues"
+  },
+  "homepage": "https://github.com/kennybaquol/university-node-api#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5",
+    "morgan": "^1.10.0",
+    "serve-favicon": "^2.5.0",
+    "web-vitals": "^3.0.3"
+  }
+}
