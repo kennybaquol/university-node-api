@@ -8,13 +8,13 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
 - [] RESTful CRUD endpoints must be available for the Student model
 - [] Must have an endpoint to perform searches for students based on full name
 - [] Data must be persisted to a database 
-- [] The Student model includes the following fields:
-    - [] First name
-    - [] Last name
-    - [] Date of birth
-    - [] Home address
-    - [] Enrollment status
-    - [] Enrollment date
+- [X] The Student model includes the following fields:
+    - [X] First name
+    - [X] Last name
+    - [X] Date of birth
+    - [X] Home address
+    - [X] Enrollment status
+    - [X] Enrollment date
 - [] All endpoints must require an API Key to authenticate against the API and gain access to its resources
     - [] If a request is unauthenticated, a 401 HTTP status code is returned
 - [] All endpoint responses must have the HTTP Response Header "x-organization" with the value of "Skyline"
