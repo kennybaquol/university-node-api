@@ -83,7 +83,22 @@ router.post("/", (req, res) => {
     firstName = firstName.toUpperCase()
     let lastName = req.body.lastName
     lastName = lastName.toUpperCase()
-    const studentId = Math.floor(Math.random()*999999999)
+    let currentId = Math.floor(Math.random()*999999999)
+    
+    // ** Can be better optimized - temporarily solution to studentId generation **
+    // let available = false
+    // while (available === false) {
+    //     currentId = Math.floor(Math.random*999999999)
+    //     Student.findOne({studentId : currentId}, (error) => {
+    //         if (error) {
+    //             console.log('No ID found! Using currently generated one')
+    //             available = true
+    //         }
+    //         else {
+    //             console.log('ID already in use...trying a new one')
+    //         }
+    //     })
+    // }
 
     Student.create({
         firstName : firstName,
@@ -92,7 +107,7 @@ router.post("/", (req, res) => {
         homeAddress : req.body.homeAddress,
         enrollmentStatus : req.body.enrollmentStatus,
         enrollmentDate : req.body.enrollmentDate,
-        studentId : studentId
+        studentId : currentId
     }, (error, student) => {
         if (error) {
             console.log(error)
