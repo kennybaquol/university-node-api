@@ -28,7 +28,7 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
 | /students              | POST         | create    
 | /students/:id          | GET          | show   
 | /students/:id/edit     | GET          | edit
-| /students/:id/delete   | GET          | get (search)     
+| /students/:id/delete   | GET          | get (delete)     
 | /students/:id          | PUT          | update    
 | /students/:id          | DELETE       | delete   
 | /students/search/:name | GET          | get (search)   
