@@ -80,6 +80,7 @@ router.get("/:id/edit", (req, res) => {
             console.log(error)
         }
         else {
+            // Liquid won't pass result in its Mongoose form, so pass it as an object
             let student = {
                 firstName: result[0].firstName,
                 lastName: result[0].lastName,
@@ -93,7 +94,6 @@ router.get("/:id/edit", (req, res) => {
             // Let client edit data for a current student
             // Send to Update route (PUT) when done
             const apiKey = req.query.key
-            console.log(student)
             res.render("students/edit", {
                 student,
                 key: apiKey
@@ -132,7 +132,34 @@ router.post("/", (req, res) => {
 
 // Update route
 router.put("/:id", (req, res) => {
-    res.send('Update')
+    let firstName = req.body.firstName
+    firstName = firstName.toUpperCase()
+    let lastName = req.body.lastName
+    lastName = lastName.toUpperCase()
+    const studentId = req.body.studentId
+
+    Student.updateOne({
+        studentId: studentId
+    },
+        {
+            $set: {
+                firstName: firstName,
+                lastName: lastName,
+                dateOfBirth: req.body.dateOfBirth,
+                homeAddress: req.body.homeAddress,
+                enrollmentStatus: req.body.enrollmentStatus,
+                enrollmentDate: req.body.enrollmentDate
+            }
+        }, (error, student) => {
+            if (error) {
+                console.log(error)
+            }
+            else {
+                console.log(student)
+                const apiKey = req.body.key
+                res.redirect(`/students/${studentId}/?key=${apiKey}`)
+            }
+        })
 })
 
 // Delete route

@@ -11,6 +11,7 @@
 
     <form action="/students/{{ student.studentId }}?_method=PUT" method="POST">
       <input type="text" class="key" name="key" value="{{ key }}">
+      <input type="text" class="key" name="studentId" value="{{ student.studentId }}">
       <input type="text" name="firstName" value="{{ student.firstName }}" placeholder="First Name"><br>
       <input type="text" name="lastName" value="{{ student.lastName }}" placeholder="Last Name"><br>
       <input type="text" name="dateOfBirth" value="{{ student.dateOfBirth }}" placeholder="Date of Birth"><br>
