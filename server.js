@@ -36,7 +36,8 @@ app.use(
 ////////////////////////////////////////////
 // Routes
 ////////////////////////////////////////////
-app.use('/students', StudentRouter) // send all "/students" routes to student router
+const API_KEY = process.env.API_KEY
+app.use(`/${API_KEY}/students`, StudentRouter) // Send all "/students" routes to student router only if the valid API is presented
 app.get("/", (req, res) => {
   res.render('index')
 });

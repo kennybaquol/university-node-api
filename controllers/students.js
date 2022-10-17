@@ -17,6 +17,8 @@ const router = express.Router();
 // Index route
 router.get("/", (req, res) => {
     res.send('Index')
+
+    // Fetch data on all students
 })
 
 // New route
@@ -28,7 +30,6 @@ router.get("/new", (req, res) => {
 router.get("/:id", (req, res) => {
     res.send('Show')
 })
-
 
 // Edit route
 router.get("/:id/edit", (req, res) => {
