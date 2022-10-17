@@ -7,7 +7,7 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
 - [X] No UI is necessary, only API endpoints
 - [] RESTful CRUD endpoints must be available for the Student model
 - [] Must have an endpoint to perform searches for students based on full name
-- [] Data must be persisted to a database 
+- [X] Data must be persisted to a database 
 - [X] The Student model includes the following fields:
     - [X] First name
     - [X] Last name

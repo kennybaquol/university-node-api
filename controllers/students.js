@@ -40,8 +40,37 @@ router.get("/new", (req, res) => {
 })
 
 // Show route
-router.get("/:id", (req, res) => {
-    res.send('Show')
+router.get("/:name", (req, res) => {
+    // console.log('now running show route on id: ' + req.params.id)
+    let name = req.params.name
+    name = name.toUpperCase()
+    console.log(name)
+    Student.find(({ firstName: { $eq: name } }), (error, student) => {
+        if (error) {
+            console.log(error)
+            res.send('No results found')
+        }
+        else {
+            // console.log(student.name)
+            res.send(student)
+        }
+    })
+})
+
+// Search route
+router.get("/search/:name", (req, res) => {
+    console.log('running search route')
+    let name = req.params.name
+    name = name.toUpperCase()
+    console.log(name)
+    Student.find(({ firstName: { $gte: name } }), (error, student) => {
+        if (error) {
+            console.log(error)
+        }
+        else {
+            res.send(student)
+        }
+    })
 })
 
 // Edit route
@@ -51,8 +80,11 @@ router.get("/:id/edit", (req, res) => {
 
 // Create route
 router.post("/", (req, res) => {
+    let firstName = req.body.firstName
+    firstName = firstName.toUpperCase()
+
     Student.create({
-        firstName : req.body.firstName,
+        firstName : firstName,
         lastName : req.body.lastName,
         dateOfBirth : req.body.dateOfBirth,
         homeAddress : req.body.homeAddress,
