@@ -34,6 +34,8 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
 | /students/search/:name | GET          | get (search)   
 
 ## Potential Shortcomings / Icebox
+- [ ] Certain incorrect URL syntax/ordering causes local server to crash - need to test on deployed server
+- [ ] Need to implement a date-picker input element on the New and Edit forms so that format errors can't occur for dates
 - [ ] Needs a way to assign student IDs without the possibility of duplicates
 - [ ] Could use a CSV Parser to handle large amounts of data that the university would have to manually input otherwise
 - [ ] Consider using required flags for Student model fields (what information might not be available for every student upon enrollment?)
