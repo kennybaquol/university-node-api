@@ -52,22 +52,16 @@ router.get("/:id", (req, res) => {
 
 // Search route
 router.get("/search/:name", (req, res) => {
-    /**
-     * NOT
-     * YET
-     * COMPLETED
-     * !
-     */
     console.log('running search route')
     let name = req.params.name
     name = name.toUpperCase()
     console.log(name)
-    Student.find(({ firstName: { $gte: name } }), (error, student) => {
+    Student.find(({ firstName: { $gte: name } }), (error, students) => {
         if (error) {
             console.log(error)
         }
         else {
-            res.send(student)
+            res.send(students)
         }
     })
 })
