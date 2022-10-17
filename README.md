@@ -17,8 +17,8 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
     - [X] Enrollment date
 - [X] All endpoints must require an API Key to authenticate against the API and gain access to its resources
     - [X] If a request is unauthenticated, a 401 HTTP status code is returned
-- [ ] All endpoint responses must have the HTTP Response Header "x-organization" with the value of "Skyline"
-    - [] e.g. x-organization: Skyline
+- [X] All endpoint responses must have the HTTP Response Header "x-organization" with the value of "Skyline"
+    - [X] e.g. x-organization: Skyline
 
 ## Route/Endpoint Table:
 | **URL**          | **HTTP Verb**|**Action**|
