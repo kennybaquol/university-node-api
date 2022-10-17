@@ -27,7 +27,7 @@ const app = require("liquid-express-views")(express(), { root: [path.resolve(__d
 // app.use(morgan("tiny")) //logging
 app.use(express.urlencoded({ extended: true })) // parse urlencoded request bodies
 // app.use(methodOverride("_method")) // override for put and delete requests from forms
-// app.use(express.static("public")) // serve files from public statically
+app.use(express.static("public")) // serve files from public statically
 
 // Middleware to setup session
 app.use(

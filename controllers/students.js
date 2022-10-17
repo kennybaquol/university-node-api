@@ -32,7 +32,11 @@ router.get("/", (req, res) => {
 router.get("/new", (req, res) => {
     // Let client enter data for a new student
     // Send to Create route (POST) when done
-    res.render("students/new")
+    const apiKey = req.query.key
+
+    res.render("students/new", {
+        key : apiKey
+    })
 })
 
 // Show route
@@ -60,8 +64,8 @@ router.post("/", (req, res) => {
         }
         else {
             console.log(student)
-            db.students.insertOne(student)
-            res.redirect('/students')
+            const apiKey = req.body.key
+            res.redirect(`/students?key=${apiKey}`)
         }
     })
 })
