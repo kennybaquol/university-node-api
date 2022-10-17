@@ -5,9 +5,6 @@
       {{ student.firstName }}
       {{student.lastName }}
     </h1>
-    <a href="/students">
-      <button>Back to Students</button>
-    </a><br><br>
 
     <form action="/students/{{ student.studentId }}?_method=PUT" method="POST">
       <input type="text" class="key" name="key" value="{{ key }}">

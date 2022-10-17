@@ -39,3 +39,4 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
 - [ ] Consider using required flags for Student model fields (what information might not be available for every student upon enrollment?)
 - [ ] A minor optimization would be to use a newer version of MongoDB that lets you use $toObjectID for casting (would eliminate need for studentId generation)
 - [ ] Search function could be much better optimized with sorting and a search method closer to Binary Search-level efficiency
+- [ ] A helper UI screen, or at least additional Liquid views, would help users navigate API endpoints easier if they don't have access to testing software (i.e. Postman)

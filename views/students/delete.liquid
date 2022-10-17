@@ -8,9 +8,6 @@
       {{ student.studentId }}
       )?
     </h1>
-    <a href="/students/{{ student.studentId }}">
-      <button>Back to Student</button>
-    </a><br><br>
 
     <h3>Are you sure you want to delete this student from the database? (This cannot be undone)</h3>
     <form action="/students/{{ student.studentId }}?_method=DELETE" method="POST">

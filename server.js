@@ -34,6 +34,12 @@ app.use(
   })
 )
 
+// Skyliing HTTP response header
+app.use((req, res, next) => {
+  res.header('X-Organization', 'Skyline')
+  next()
+})
+
 ////////////////////////////////////////////
 // Routes
 ////////////////////////////////////////////
@@ -42,12 +48,14 @@ app.use(
 app.get(`/students`, function(req, res, next) {
   const apiKey = req.query.key
   if (!apiKey || process.env.API_KEY !== apiKey) {
-    res.status(401).send('Status: Unauthorized')
+    // res.header('X-Organization', 'Skyline')
+    res.status(401).send('401 Error: Unauthorized')
   }
   else {
     next()
   }
 }) 
+
 app.use(`/students`, StudentRouter) 
 
 //////////////////////////////////////////////
