@@ -4,6 +4,47 @@
 const express = require("express");
 const Student = require("../models/student");
 
+/**
+ * Global helper function for Search route
+ * @param {string} nameToSearch 
+ * @param {object} students 
+ */
+const searchResults = (nameToSearch, results) => {
+    // Return an object containing all students that have the minimum number of matching letters
+    let students = []
+
+    let searchLetters = []
+    for (let i = 0; i < nameToSearch.length; i++) {
+        searchLetters.push(nameToSearch.charAt(i))
+    }
+    
+    // Print an error if the user didn't type at least 3 characters in the search URL
+    if (searchLetters.length < 3) {
+        // ** NEEDS RESPONSE ERROR ! **
+    }
+    
+    // One student at a time, add them if at least 3 of the search 
+    // letters are in their first or last names
+    nextStudent:
+    for (student in results) {
+        let numberOfMatchingLetters = 0
+        let currentStudent = results[student]
+        let fullName = currentStudent.firstName + currentStudent.lastName
+        for (let i = 0; i < searchLetters.length; i++) {
+            if (fullName.indexOf(searchLetters[i]) >= 0) {
+                numberOfMatchingLetters++
+                if (numberOfMatchingLetters >= 3) {
+                    students.push(currentStudent)
+                    continue nextStudent
+                }
+            }
+        }
+
+    }
+
+    return students
+}
+
 /////////////////////////////////////////
 // Create Route
 /////////////////////////////////////////
@@ -52,15 +93,14 @@ router.get("/:id", (req, res) => {
 
 // Search route
 router.get("/search/:name", (req, res) => {
-    console.log('running search route')
-    let name = req.params.name
-    name = name.toUpperCase()
-    console.log(name)
-    Student.find(({ firstName: { $gte: name } }), (error, students) => {
+    let nameToSearch = req.params.name
+    nameToSearch = nameToSearch.toUpperCase()
+    Student.find((error, results) => {
         if (error) {
             console.log(error)
         }
         else {
+            const students = searchResults(nameToSearch, results)
             res.send(students)
         }
     })
@@ -114,7 +154,7 @@ router.post("/", (req, res) => {
         enrollmentStatus: req.body.enrollmentStatus,
         enrollmentDate: req.body.enrollmentDate,
         studentId: currentId
-    }, (error, student) => {
+    }, (error) => {
         if (error) {
             console.log(error)
         }
@@ -158,7 +198,7 @@ router.put("/:id", (req, res) => {
 })
 
 // Get route/endpoint to take user to delete route
-router.get("/:id/delete", (req,res) => {
+router.get("/:id/delete", (req, res) => {
     // Find student by studentId to be deleted
     const apiKey = req.query.key
     let id = req.params.id

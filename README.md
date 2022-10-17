@@ -6,7 +6,7 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
 ## Client Requirements (Phase 1)
 - [X] No UI is necessary, only API endpoints
 - [X] RESTful CRUD endpoints must be available for the Student model
-- [ ] Must have an endpoint to perform searches for students based on full name
+- [X] Must have an endpoint to perform searches for students based on full name
 - [X] Data must be persisted to a database 
 - [X] The Student model includes the following fields:
     - [X] First name
@@ -38,4 +38,4 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
 - [ ] Could use a CSV Parser to handle large amounts of data that the university would have to manually input otherwise
 - [ ] Consider using required flags for Student model fields (what information might not be available for every student upon enrollment?)
 - [ ] A minor optimization would be to use a newer version of MongoDB that lets you use $toObjectID for casting (would eliminate need for studentId generation)
-- [ ] 
+- [ ] Search function could be much better optimized with sorting and a search method closer to Binary Search-level efficiency
