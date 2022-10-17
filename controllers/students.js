@@ -15,7 +15,7 @@ const router = express.Router();
 
 // Index route
 router.get("/", (req, res) => {
-    // Find and send back JSON data on all students
+    // Find all students and send data back to client in response
     Student.find((error, result) => {
         if (error) {
             console.log(error)
@@ -38,6 +38,7 @@ router.get("/new", (req, res) => {
 
 // Show route
 router.get("/:id", (req, res) => {
+    // Find student by studentId and send data back to client in response
     let id = req.params.id
     Student.find(({ studentId: id }), (error, student) => {
         if (error) {
@@ -73,7 +74,7 @@ router.get("/search/:name", (req, res) => {
 
 // Edit route
 router.get("/:id/edit", (req, res) => {
-    // Find current student based on student ID
+    // Find student by studentId to be edited
     let id = req.params.id
     Student.find(({ studentId: id }), (error, result) => {
         if (error) {
@@ -91,7 +92,7 @@ router.get("/:id/edit", (req, res) => {
                 studentId: result[0].studentId
             }
 
-            // Let client edit data for a current student
+            // Let user edit data for a current student
             // Send to Update route (PUT) when done
             const apiKey = req.query.key
             res.render("students/edit", {
@@ -104,6 +105,7 @@ router.get("/:id/edit", (req, res) => {
 
 // Create route
 router.post("/", (req, res) => {
+    // Create new student with a randomly generated studentId and formatted full name
     let firstName = req.body.firstName
     firstName = firstName.toUpperCase()
     let lastName = req.body.lastName
@@ -123,7 +125,6 @@ router.post("/", (req, res) => {
             console.log(error)
         }
         else {
-            console.log(student)
             const apiKey = req.body.key
             res.redirect(`/students?key=${apiKey}`)
         }
@@ -132,6 +133,7 @@ router.post("/", (req, res) => {
 
 // Update route
 router.put("/:id", (req, res) => {
+    // Find student by studentId to be updated
     let firstName = req.body.firstName
     firstName = firstName.toUpperCase()
     let lastName = req.body.lastName
@@ -155,7 +157,6 @@ router.put("/:id", (req, res) => {
                 console.log(error)
             }
             else {
-                console.log(student)
                 const apiKey = req.body.key
                 res.redirect(`/students/${studentId}/?key=${apiKey}`)
             }
@@ -164,6 +165,7 @@ router.put("/:id", (req, res) => {
 
 // Get route/endpoint to take user to delete route
 router.get("/:id/delete", (req,res) => {
+    // Find student by studentId to be deleted
     const apiKey = req.query.key
     let id = req.params.id
     Student.find(({ studentId: id }), (error, result) => {
@@ -176,7 +178,6 @@ router.get("/:id/delete", (req,res) => {
                 lastName: result[0].lastName,
                 studentId: result[0].studentId
             }
-
             res.render('students/delete', {
                 student,
                 key: apiKey
@@ -195,8 +196,6 @@ router.delete("/:id", (req, res) => {
     }, (error) => {
         if (error) {
             console.log(error)
-            // ** FIX THIS ! **
-            // res.status(500)
         }
         else {
             console.log('Successfully deleted student ID: ' + studentId)

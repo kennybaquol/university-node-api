@@ -4,30 +4,25 @@
 require("dotenv").config() // Load ENV Variables
 const express = require("express")
 const bodyParser = require("body-parser")
-// const morgan = require("morgan");
-// const mongoose = require("mongoose");
 const path = require("path")
 const StudentRouter = require('./controllers/students')
 const methodOverride = require("method-override")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")
 
-
-
 /////////////////////////////////////////////////
 // Create our Express Application Object
 /////////////////////////////////////////////////
-// const app = express()
 const app = require("liquid-express-views")(express(), { root: [path.resolve(__dirname, 'views/')] })
 
 
 /////////////////////////////////////////////////////
 // Middleware
 /////////////////////////////////////////////////////
-// app.use(morgan("tiny")) //logging
 app.use(express.urlencoded({ extended: true })) // parse urlencoded request bodies
 app.use(methodOverride("_method")) // override for put and delete requests from forms
 app.use(express.static("public")) // serve files from public statically
+app.use(bodyParser.json()) // helper middleware to display JSON
 
 // Middleware to setup session
 app.use(
@@ -38,11 +33,6 @@ app.use(
     resave: false,
   })
 )
-// app.use(function (req, res, next) {
-//   res.header('Origin, X-Requested-With, Content-Type, Accept, API-Key')
-//   next()
-// })
-app.use(bodyParser.json())
 
 ////////////////////////////////////////////
 // Routes
