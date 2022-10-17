@@ -4,6 +4,7 @@
 const express = require("express");
 const Student = require("../models/student");
 const fetch = require('node-fetch');
+const { db } = require("../models/student");
 
 /////////////////////////////////////////
 // Create Route
@@ -16,7 +17,7 @@ const router = express.Router();
 
 // Index route
 router.get("/", (req, res) => {
-    // Fetch data on all students
+    // Find and send back JSON data on all students
     Student.find((error, result) => {
         if (error) {
             console.log(error)
@@ -29,7 +30,9 @@ router.get("/", (req, res) => {
 
 // New route
 router.get("/new", (req, res) => {
-    res.send('New')
+    // Let client enter data for a new student
+    // Send to Create route (POST) when done
+    res.render("students/new")
 })
 
 // Show route
@@ -44,7 +47,23 @@ router.get("/:id/edit", (req, res) => {
 
 // Create route
 router.post("/", (req, res) => {
-    res.send('Create')
+    Student.create({
+        firstName : req.body.firstName,
+        lastName : req.body.lastName,
+        dateOfBirth : req.body.dateOfBirth,
+        homeAddress : req.body.homeAddress,
+        enrollmentStatus : req.body.enrollmentStatus,
+        enrollmentDate : req.body.enrollmentDate
+    }, (error, student) => {
+        if (error) {
+            console.log(error)
+        }
+        else {
+            console.log(student)
+            db.students.insertOne(student)
+            res.redirect('/students')
+        }
+    })
 })
 
 // Update route

@@ -1,0 +1,19 @@
+{% layout "layout.liquid" %}
+{% block content %}
+  <div>
+    <h1>Add New Student</h1>
+    <a href="/students">
+      <button>Back to Students</button>
+    </a><br><br>
+
+    <form action="/students" method="POST">
+      <input type="text" name="firstName" placeholder="First Name"><br>
+      <input type="text" name="lastName" placeholder="Last Name"><br>
+      <input type="text" name="dateOfBirth" placeholder="Date of Birth"><br>
+      <input type="text" name="homeAddress" placeholder="Home Address"><br>
+      <input type="text" name="enrollmentStatus" placeholder="Enrollment Status"><br>
+      <input type="text" name="enrollmentDate" placeholder="Enrollment Date"><br><br>
+      <input type="submit">
+    </form>
+  </div>
+{% endblock %}
