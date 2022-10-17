@@ -16,10 +16,39 @@ const router = express.Router();
 
 // Index route
 router.get("/", (req, res) => {
-    res.send('hi')
+    res.send('Index')
+})
+
+// New route
+router.get("/new", (req, res) => {
+    res.send('New')
+})
+
+// Show route
+router.get("/:id", (req, res) => {
+    res.send('Show')
 })
 
 
+// Edit route
+router.get("/:id/edit", (req, res) => {
+    res.send('Edit')
+})
+
+// Create route
+router.post("/", (req, res) => {
+    res.send('Create')
+})
+
+// Update route
+router.put("/:id", (req, res) => {
+    res.send('Update')
+})
+
+// Delete route
+router.delete("/:id", (req, res) => {
+    res.send('Delete')
+})
 
 //////////////////////////////////////////
 // Export the Router
