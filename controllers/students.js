@@ -5,6 +5,7 @@ const express = require("express");
 const Student = require("../models/student");
 const fetch = require('node-fetch');
 const { db } = require("../models/student");
+const { ObjectID } = require("bson");
 
 /////////////////////////////////////////
 // Create Route
@@ -40,18 +41,16 @@ router.get("/new", (req, res) => {
 })
 
 // Show route
-router.get("/:name", (req, res) => {
+router.get("/:id", (req, res) => {
     // console.log('now running show route on id: ' + req.params.id)
-    let name = req.params.name
-    name = name.toUpperCase()
-    console.log(name)
-    Student.find(({ firstName: { $eq: name } }), (error, student) => {
+    let id = req.params.id
+    // name = name.toUpperCase()
+    // console.log(name)
+    Student.find(({ _id : { $toObjectId: id } }), (error, student) => {
         if (error) {
             console.log(error)
-            res.send('No results found')
         }
         else {
-            // console.log(student.name)
             res.send(student)
         }
     })
@@ -82,6 +81,9 @@ router.get("/:id/edit", (req, res) => {
 router.post("/", (req, res) => {
     let firstName = req.body.firstName
     firstName = firstName.toUpperCase()
+    let lastName = req.body.lastName
+    lastName = lastName.toUpperCase()
+    const studentId = Math.floor(Math.random()*999999999)
 
     Student.create({
         firstName : firstName,
@@ -89,7 +91,8 @@ router.post("/", (req, res) => {
         dateOfBirth : req.body.dateOfBirth,
         homeAddress : req.body.homeAddress,
         enrollmentStatus : req.body.enrollmentStatus,
-        enrollmentDate : req.body.enrollmentDate
+        enrollmentDate : req.body.enrollmentDate,
+        studentId : studentId
     }, (error, student) => {
         if (error) {
             console.log(error)

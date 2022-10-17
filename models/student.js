@@ -16,7 +16,8 @@ const studentsSchema = new Schema({
   dateOfBirth: Date,
   homeAddress: String,
   enrollmentStatus: String,
-  enrollmentDate: Date
+  enrollmentDate: Date,
+  studentId: Number
 })
 
 
