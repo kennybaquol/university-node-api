@@ -9,7 +9,10 @@ const express = require("express");
 const StudentRouter = require('./controllers/students')
 // const methodOverride = require("method-override");
 const session = require("express-session")
-const MongoStore = require("connect-mongo")
+const MongoStore = require("connect-mongo");
+const { use } = require("./controllers/students");
+
+
 
 /////////////////////////////////////////////////
 // Create our Express Application Object
@@ -32,15 +35,26 @@ app.use(
     resave: false,
   })
 )
+app.use(function (req, res, next) {
+  res.header('Origin, X-Requested-With, Content-Type, Accept, API-Key')
+  next()
+})
 
 ////////////////////////////////////////////
 // Routes
 ////////////////////////////////////////////
-const API_KEY = process.env.API_KEY
-app.use(`/${API_KEY}/students`, StudentRouter) // Send all "/students" routes to student router only if the valid API is presented
-app.get("/", (req, res) => {
-  res.render('index')
-});
+
+// Send all "/students" routes to student router only if the valid API is presented
+app.get(`/students`, function(req, res, next) {
+  const apiKey = req.query.key
+  if (!apiKey || process.env.API_KEY !== apiKey) {
+    res.status(401).send('Status: Unauthorized')
+  }
+  else {
+    next()
+  }
+}) 
+app.use(`/students`, StudentRouter) 
 
 //////////////////////////////////////////////
 // Server Listener
