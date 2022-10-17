@@ -3,9 +3,6 @@
 ////////////////////////////////////////
 const express = require("express");
 const Student = require("../models/student");
-const fetch = require('node-fetch');
-const { db } = require("../models/student");
-const { ObjectID } = require("bson");
 
 /////////////////////////////////////////
 // Create Route
@@ -34,7 +31,6 @@ router.get("/new", (req, res) => {
     // Let client enter data for a new student
     // Send to Create route (POST) when done
     const apiKey = req.query.key
-
     res.render("students/new", {
         key : apiKey
     })
@@ -42,11 +38,8 @@ router.get("/new", (req, res) => {
 
 // Show route
 router.get("/:id", (req, res) => {
-    // console.log('now running show route on id: ' + req.params.id)
     let id = req.params.id
-    // name = name.toUpperCase()
-    // console.log(name)
-    Student.find(({ _id : { $toObjectId: id } }), (error, student) => {
+    Student.find(({ studentId : id }), (error, student) => {
         if (error) {
             console.log(error)
         }
@@ -84,21 +77,6 @@ router.post("/", (req, res) => {
     let lastName = req.body.lastName
     lastName = lastName.toUpperCase()
     let currentId = Math.floor(Math.random()*999999999)
-    
-    // ** Can be better optimized - temporarily solution to studentId generation **
-    // let available = false
-    // while (available === false) {
-    //     currentId = Math.floor(Math.random*999999999)
-    //     Student.findOne({studentId : currentId}, (error) => {
-    //         if (error) {
-    //             console.log('No ID found! Using currently generated one')
-    //             available = true
-    //         }
-    //         else {
-    //             console.log('ID already in use...trying a new one')
-    //         }
-    //     })
-    // }
 
     Student.create({
         firstName : firstName,
