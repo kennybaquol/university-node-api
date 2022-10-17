@@ -32,14 +32,14 @@ router.get("/new", (req, res) => {
     // Send to Create route (POST) when done
     const apiKey = req.query.key
     res.render("students/new", {
-        key : apiKey
+        key: apiKey
     })
 })
 
 // Show route
 router.get("/:id", (req, res) => {
     let id = req.params.id
-    Student.find(({ studentId : id }), (error, student) => {
+    Student.find(({ studentId: id }), (error, student) => {
         if (error) {
             console.log(error)
         }
@@ -51,6 +51,12 @@ router.get("/:id", (req, res) => {
 
 // Search route
 router.get("/search/:name", (req, res) => {
+    /**
+     * NOT
+     * YET
+     * COMPLETED
+     * !
+     */
     console.log('running search route')
     let name = req.params.name
     name = name.toUpperCase()
@@ -67,7 +73,33 @@ router.get("/search/:name", (req, res) => {
 
 // Edit route
 router.get("/:id/edit", (req, res) => {
-    res.send('Edit')
+    // Find current student based on student ID
+    let id = req.params.id
+    Student.find(({ studentId: id }), (error, result) => {
+        if (error) {
+            console.log(error)
+        }
+        else {
+            let student = {
+                firstName: result[0].firstName,
+                lastName: result[0].lastName,
+                dateOfBirth: result[0].dateOfBirth,
+                homeAddress: result[0].homeAddress,
+                enrollmentStatus: result[0].enrollmentStatus,
+                enrollmentDate: result[0].enrollmentDate,
+                studentId: result[0].studentId
+            }
+
+            // Let client edit data for a current student
+            // Send to Update route (PUT) when done
+            const apiKey = req.query.key
+            console.log(student)
+            res.render("students/edit", {
+                student,
+                key: apiKey
+            })
+        }
+    })
 })
 
 // Create route
@@ -76,16 +108,16 @@ router.post("/", (req, res) => {
     firstName = firstName.toUpperCase()
     let lastName = req.body.lastName
     lastName = lastName.toUpperCase()
-    let currentId = Math.floor(Math.random()*999999999)
+    let currentId = Math.floor(Math.random() * 999999999)
 
     Student.create({
-        firstName : firstName,
-        lastName : req.body.lastName,
-        dateOfBirth : req.body.dateOfBirth,
-        homeAddress : req.body.homeAddress,
-        enrollmentStatus : req.body.enrollmentStatus,
-        enrollmentDate : req.body.enrollmentDate,
-        studentId : currentId
+        firstName: firstName,
+        lastName: lastName,
+        dateOfBirth: req.body.dateOfBirth,
+        homeAddress: req.body.homeAddress,
+        enrollmentStatus: req.body.enrollmentStatus,
+        enrollmentDate: req.body.enrollmentDate,
+        studentId: currentId
     }, (error, student) => {
         if (error) {
             console.log(error)

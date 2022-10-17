@@ -1,0 +1,23 @@
+{% layout "layout.liquid" %}
+{% block content %}
+  <div>
+    <h1>Edit
+      {{ student.firstName }}
+      {{student.lastName }}
+    </h1>
+    <a href="/students">
+      <button>Back to Students</button>
+    </a><br><br>
+
+    <form action="/students/{{ student.studentId }}?_method=PUT" method="POST">
+      <input type="text" class="key" name="key" value="{{ key }}">
+      <input type="text" name="firstName" value="{{ student.firstName }}" placeholder="First Name"><br>
+      <input type="text" name="lastName" value="{{ student.lastName }}" placeholder="Last Name"><br>
+      <input type="text" name="dateOfBirth" value="{{ student.dateOfBirth }}" placeholder="Date of Birth"><br>
+      <input type="text" name="homeAddress" value="{{ student.homeAddress }}" placeholder="Home Address"><br>
+      <input type="text" name="enrollmentStatus" value="{{ student.enrollmentStatus }}" placeholder="Enrollment Status"><br>
+      <input type="text" name="enrollmentDate" value="{{ student.enrollmentDate }}" placeholder="Enrollment Date"><br><br>
+      <input type="submit">
+    </form>
+  </div>
+{% endblock %}
