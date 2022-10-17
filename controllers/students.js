@@ -162,9 +162,47 @@ router.put("/:id", (req, res) => {
         })
 })
 
+// Get route/endpoint to take user to delete route
+router.get("/:id/delete", (req,res) => {
+    const apiKey = req.query.key
+    let id = req.params.id
+    Student.find(({ studentId: id }), (error, result) => {
+        if (error) {
+            console.log(error)
+        }
+        else {
+            let student = {
+                firstName: result[0].firstName,
+                lastName: result[0].lastName,
+                studentId: result[0].studentId
+            }
+
+            res.render('students/delete', {
+                student,
+                key: apiKey
+            })
+        }
+    })
+})
+
 // Delete route
 router.delete("/:id", (req, res) => {
-    res.send('Delete')
+    const apiKey = req.body.key
+    const studentId = req.body.studentId
+
+    Student.deleteOne({
+        studentId: studentId
+    }, (error) => {
+        if (error) {
+            console.log(error)
+            // ** FIX THIS ! **
+            // res.status(500)
+        }
+        else {
+            console.log('Successfully deleted student ID: ' + studentId)
+            res.redirect(`/students/?key=${apiKey}`)
+        }
+    })
 })
 
 //////////////////////////////////////////

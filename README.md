@@ -22,7 +22,7 @@ Phase 1 of the project is to build a RESTful API to maintain all personal studen
 
 ## Potential Shortcomings / Icebox
 - [] Needs a way to assign student IDs without the possibility of duplicates
-- [] 
+- [] Could use a CSV Parser to handle large amounts of data that the university would have to manually input otherwise
 - [] 
 - [] 
 - [] 
