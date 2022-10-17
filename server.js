@@ -1,16 +1,16 @@
 /////////////////////////////////////////////
 // Import Dependencies
 /////////////////////////////////////////////
-require("dotenv").config(); // Load ENV Variables
-const express = require("express");
+require("dotenv").config() // Load ENV Variables
+const express = require("express")
+// const bodyParser = require("body-parser")
 // const morgan = require("morgan");
 // const mongoose = require("mongoose");
 // const path = require("path")
 const StudentRouter = require('./controllers/students')
 // const methodOverride = require("method-override");
 const session = require("express-session")
-const MongoStore = require("connect-mongo");
-const { use } = require("./controllers/students");
+const MongoStore = require("connect-mongo")
 
 
 
@@ -26,6 +26,7 @@ const app = express()
 // app.use(express.urlencoded({ extended: true })) // parse urlencoded request bodies
 // app.use(methodOverride("_method")) // override for put and delete requests from forms
 // app.use(express.static("public")) // serve files from public statically
+
 // Middleware to setup session
 app.use(
   session({

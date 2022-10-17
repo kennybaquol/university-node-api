@@ -4,7 +4,7 @@ faculty, courses, course schedules, and student grades and major/minor progress.
 Phase 1 of the project is to build a RESTful API to maintain all personal student data.
 
 ## Client Requirements (Phase 1)
-- [] No UI is necessary, only API endpoints
+- [X] No UI is necessary, only API endpoints
 - [] RESTful CRUD endpoints must be available for the Student model
 - [] Must have an endpoint to perform searches for students based on full name
 - [] Data must be persisted to a database 

@@ -16,13 +16,15 @@ const router = express.Router();
 
 // Index route
 router.get("/", (req, res) => {
-    // res.send('Index')
-    const welcome = [
-        { title : 'Hello!' }
-    ]
-    res.send(welcome
-        )
     // Fetch data on all students
+    Student.find((error, result) => {
+        if (error) {
+            console.log(error)
+        }
+        else {
+            res.send(result)
+        }
+    })
 })
 
 // New route
